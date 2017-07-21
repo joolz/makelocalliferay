@@ -1,10 +1,10 @@
 # makelocalliferay
 
-Some fiddling with Maven to setup versions of apps on a local liferay environment. This should be as hans-free as possible. Things to find out about Maven:
+Some fiddling with Maven to setup versions of apps on a local liferay environment. This should be as hands-free as possible. Things to find out about Maven:
 
 - [x] pass parameter
 - [x] echo
-- [ ] read propertyfile
+- [ ] read multi-line propertyfile, each line containing two values (or another way to pass in value-pairs)
 - [ ] execute external commands
 - [ ] catch exit code
 - [ ] continue or exit depending on exit code
