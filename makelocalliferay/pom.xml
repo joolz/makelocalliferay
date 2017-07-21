@@ -1,12 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-  <groupId>nl.ou.dlwo</groupId>
-  <artifactId>makelocalliferay</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>makelocalliferay</name>
+	<groupId>nl.ou.dlwo</groupId>
+	<artifactId>makelocalliferay</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>makelocalliferay</name>
+
+	<properties>
+		<antrun.version>1.8</antrun.version>
+		<exec.version>1.6.0</exec.version>
+	</properties>
 
 	<profiles>
 		<profile>
@@ -37,29 +42,70 @@
 
 		<!-- echo a parameter value -->
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
+				<version>${antrun.version}</version>
 				<executions>
-
 					<execution>
 						<id>default-cli</id>
 						<configuration>
 							<target>
 								<echo>Parameter ticketnumber has value ${ticket.number}</echo>
 								<echo>Property script.extension has value ${script.extension}</echo>
-								<exec dir=".." executable="./testfail${script.extension}" />
-								<exec dir=".." executable="./testok${script.extension}" />
 							</target>
 						</configuration>
 					</execution>
-
 				</executions>
 			</plugin>
+
+			<!-- run external command that passes -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${exec.version}</version>
+				<executions>
+					<execution>
+						<id>first-one</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>./testok${script.extension}</executable>
+					<arguments>
+						<argument>someargument</argument>
+					</arguments>
+					<workingDirectory>..</workingDirectory>
+				</configuration>
+			</plugin>
+
+			<!-- run external command that fails -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${exec.version}</version>
+				<executions>
+					<execution>
+						<id>first-one</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>./testfail${script.extension}</executable>
+					<arguments>
+						<argument>someargument</argument>
+					</arguments>
+					<workingDirectory>..</workingDirectory>
+				</configuration>
+			</plugin>
+
 		</plugins>
-	
-	
+
 	</build>
 
 </project>
