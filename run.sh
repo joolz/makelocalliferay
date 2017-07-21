@@ -17,6 +17,6 @@ test -d $PROJECT || \
 
 pushd $PROJECT
 
-mvn clean compile -Dticket.number=YL-1234
+mvn antrun:run -Dticket.number=YL-1234
 
 popd

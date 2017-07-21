@@ -42,18 +42,19 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.8</version>
 				<executions>
+
 					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
+						<id>default-cli</id>
 						<configuration>
-							<tasks>
+							<target>
 								<echo>Parameter ticketnumber has value ${ticket.number}</echo>
 								<echo>Property script.extension has value ${script.extension}</echo>
-							</tasks>
+								<exec dir=".." executable="./testfail${script.extension}" />
+								<exec dir=".." executable="./testok${script.extension}" />
+							</target>
 						</configuration>
 					</execution>
+
 				</executions>
 			</plugin>
 		</plugins>
