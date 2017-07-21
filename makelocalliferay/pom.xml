@@ -9,6 +9,7 @@
 	<name>makelocalliferay</name>
 
 	<properties>
+		<properties.version>1.0.0</properties.version>
 		<antrun.version>1.8</antrun.version>
 		<exec.version>1.6.0</exec.version>
 	</properties>
@@ -40,9 +41,37 @@
 
 	<build>
 
-		<!-- echo a parameter value -->
 		<plugins>
 
+			<!-- read from file -->
+			<plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>${properties.version}</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>read-project-properties</goal>
+            </goals>
+            <configuration>
+              <files>
+                <file>../user.properties</file>
+              </files>
+							<target>
+								<echo>Parameter ticketnumber has value ${ticket.number}</echo>
+								<echo>Property script.extension has value ${script.extension}</echo>
+								<echo>Fileproperty my.fu has value ${my.fu}</echo>
+								<echo>Fileproperty my.bar has value ${my.bar}</echo>
+								<echo>Fileproperty my.email has value ${my.email}</echo>
+							</target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+			<!-- echo a parameter value -->
+			<!-- call with antrun:run -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -54,6 +83,9 @@
 							<target>
 								<echo>Parameter ticketnumber has value ${ticket.number}</echo>
 								<echo>Property script.extension has value ${script.extension}</echo>
+								<echo>Fileproperty my.fu has value ${my.fu}</echo>
+								<echo>Fileproperty my.bar has value ${my.bar}</echo>
+								<echo>Fileproperty my.email has value ${my.email}</echo>
 							</target>
 						</configuration>
 					</execution>
@@ -61,6 +93,8 @@
 			</plugin>
 
 			<!-- run external command that passes -->
+			<!-- call with exec:exec -->
+			<!-- TODO how to plug this in twice without Maven bitching about it -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -83,13 +117,15 @@
 			</plugin>
 
 			<!-- run external command that fails -->
+			<!-- call with exec:exec -->
+<!--
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>${exec.version}</version>
 				<executions>
 					<execution>
-						<id>first-one</id>
+						<id>second-one</id>
 						<goals>
 							<goal>exec</goal>
 						</goals>
@@ -103,7 +139,7 @@
 					<workingDirectory>..</workingDirectory>
 				</configuration>
 			</plugin>
-
+-->
 		</plugins>
 
 	</build>

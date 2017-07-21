@@ -17,6 +17,6 @@ test -d $PROJECT || \
 
 pushd $PROJECT
 
-mvn exec:exec -Dticket.number=YL-1234
+mvn install exec:exec antrun:run -Dticket.number=YL-1234
 
 popd
