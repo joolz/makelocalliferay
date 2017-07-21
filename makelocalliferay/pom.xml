@@ -8,6 +8,31 @@
   <packaging>pom</packaging>
   <name>makelocalliferay</name>
 
+	<profiles>
+		<profile>
+			<id>Windows</id>
+			<activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+			<properties>
+				<script.extension>.bat</script.extension>
+			</properties>
+		</profile>
+		<profile>
+			<id>unix</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<script.extension>.sh</script.extension>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 
 		<!-- echo a parameter value -->
@@ -24,8 +49,8 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<echo>Displaying value of 'ticketnumber' property</echo>
-								<echo>[ticketnumber] ${ticketnumber}</echo>
+								<echo>Parameter ticketnumber has value ${ticket.number}</echo>
+								<echo>Property script.extension has value ${script.extension}</echo>
 							</tasks>
 						</configuration>
 					</execution>
