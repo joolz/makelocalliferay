@@ -57,14 +57,8 @@
             <configuration>
               <files>
                 <file>../user.properties</file>
+                <file>../${ticket.number}.properties</file>
               </files>
-							<target>
-								<echo>Parameter ticketnumber has value ${ticket.number}</echo>
-								<echo>Property script.extension has value ${script.extension}</echo>
-								<echo>Fileproperty my.fu has value ${my.fu}</echo>
-								<echo>Fileproperty my.bar has value ${my.bar}</echo>
-								<echo>Fileproperty my.email has value ${my.email}</echo>
-							</target>
             </configuration>
           </execution>
         </executions>
@@ -86,6 +80,9 @@
 								<echo>Fileproperty my.fu has value ${my.fu}</echo>
 								<echo>Fileproperty my.bar has value ${my.bar}</echo>
 								<echo>Fileproperty my.email has value ${my.email}</echo>
+								<echo>Project A branch is ${projecta.branch}</echo>
+								<echo>Project B branch is ${projectb.branch}</echo>
+								<echo>Project C branch is ${projectc.branch}</echo>
 							</target>
 						</configuration>
 					</execution>
@@ -94,7 +91,6 @@
 
 			<!-- run external command that passes -->
 			<!-- call with exec:exec -->
-			<!-- TODO how to plug this in twice without Maven bitching about it -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -118,6 +114,7 @@
 
 			<!-- run external command that fails -->
 			<!-- call with exec:exec -->
+			<!-- TODO how to plug this in twice without Maven bitching about it -->
 <!--
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

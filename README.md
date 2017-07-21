@@ -5,7 +5,8 @@ Some fiddling with Maven to setup versions of apps on a local liferay environmen
 - [x] pass parameter
 - [x] echo
 - [x] read multi-line propertyfile
-- [ ] read multi-line propertyfile, each line containing two values (or another way to pass in value-pairs)
+- [ ] read multi-line propertyfile, each line containing two values (or another way to pass in value-pairs) ...
+- [ ] ... or have default values for a set of properties with the posiibility to overwrite those (profile?)
 - [x] execute external commands ...
 - [x] ... distinguishing OS (different scipts / extensions)
 - [x] catch exit code
